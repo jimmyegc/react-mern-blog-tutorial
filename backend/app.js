@@ -8,14 +8,16 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/blogs", blogRoutes);
-
+/*
+// Conexión a MySQL
 try {
   await db.authenticate();
   console.log("💿  Conexión exitosa a la BD.");
 } catch (error) {
   console.log(`⚠️  Error en la conexión (${error}).`);
-}
+} */
 
 app.get("/", (req, res) => {
   res.send("Hola mundo");

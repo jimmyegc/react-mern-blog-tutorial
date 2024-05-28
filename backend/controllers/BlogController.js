@@ -2,8 +2,9 @@ import BlogModel from "../models/BlogModel.js";
 
 export const getAllBlogs = async (req, res) => {
   try {
-    const blogs = await BlogModel.findAll();
-    res.json(blogs);
+    // const blogs = await BlogModel.findAll(); // MySQL
+    const blogs = await BlogModel.find();
+    res.status(200).json(blogs);
   } catch (error) {
     res.json({ message: error.message });
   }
@@ -11,10 +12,15 @@ export const getAllBlogs = async (req, res) => {
 
 export const getBlog = async (req, res) => {
   try {
+    /* 
+    // MySQL
     const blog = await BlogModel.findAll({
       where: { id: req.params.id },
+    }); */
+    const id = req.params.id;
+    await BlogModel.findById({ _id: id }).then((blog) => {
+      res.status(200).json(blog);
     });
-    res.json(blog[0]);
   } catch (error) {
     res.json({ message: error.message });
   }
@@ -22,9 +28,10 @@ export const getBlog = async (req, res) => {
 
 export const createBlog = async (req, res) => {
   try {
+    // await BlogModel.create(req.body); // MySQL
     await BlogModel.create(req.body);
-    res.json({
-      message: "Registro creado correctamente",
+    res.status(200).json({
+      message: "Blog creado correctamente",
     });
   } catch (error) {
     res.json({ message: error.message });
@@ -33,11 +40,17 @@ export const createBlog = async (req, res) => {
 
 export const updateBlog = async (req, res) => {
   try {
+    /* 
+    // MySQL 
     await BlogModel.update(req.body, {
       where: { id: req.params.id },
-    });
-    res.json({
-      message: "Registro actualizado correctamente",
+    }); */
+    const id = req.params.id;
+    await BlogModel.updateOne({ _id: id }, req.body).then((response) => {
+      console.log(response);
+      res.status(200).json({
+        message: "Blog actualizado correctamente",
+      });
     });
   } catch (error) {
     res.json({ message: error.message });
@@ -46,11 +59,19 @@ export const updateBlog = async (req, res) => {
 
 export const deleteBlog = async (req, res) => {
   try {
+    /* 
+    // MySQL
     await BlogModel.destroy({
       where: { id: req.params.id },
+    }); */
+    const id = req.params.id;
+    await BlogModel.deleteOne({
+      _id: req.params.id,
+    }).then((res) => {
+      console.log(res);
     });
-    res.json({
-      message: "Registro eliminado correctamente",
+    res.status(200).json({
+      message: "Blog eliminado correctamente",
     });
   } catch (error) {
     res.json({ message: error.message });

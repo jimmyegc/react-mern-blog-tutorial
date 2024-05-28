@@ -30,14 +30,14 @@ const ShowBlogs = () => {
           <th>Content</th>
           <th>Actions</th>
         </tr>
-        {blogs?.map((blog) => (
-          <tr key={blog.id}>
-            <td>{blog.id}</td>
+        {blogs?.map((blog, index) => (
+          <tr key={blog._id}>
+            <td>{index + 1}</td>
             <td>{blog.title}</td>
             <td>{blog.content}</td>
             <td>
-              <Link to={`/edit/${blog.id}`}>Editar</Link>
-              <button onClick={() => deleteBlog(blog.id)}>Delete</button>
+              <Link to={`/edit/${blog._id}`}>Editar</Link>
+              <button onClick={() => deleteBlog(blog._id)}>Delete</button>
             </td>
           </tr>
         ))}

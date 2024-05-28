@@ -12,7 +12,6 @@ export const CreateBlog = () => {
   const store = async (e) => {
     e.preventDefault()
     console.log(title, content)
-    return
     await axios.post(URI, { title: title, content: content })
     navigate('/')
   }
