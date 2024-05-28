@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const URI = 'http://localhost:8000/blogs/'
 
 const ShowBlogs = () => {
-  const [blogs, setBlogs] = useState([])
+  const [blogs, setBlogs] = useState(null)
   useEffect(() => {
     getBlogs()
   }, [])
@@ -16,7 +16,7 @@ const ShowBlogs = () => {
   }
 
   const deleteBlog = async (id) => {
-    axios.delete(`${URI}/${id}`)
+    await axios.delete(`${URI}/${id}`)
     getBlogs()
   }
 
@@ -30,11 +30,11 @@ const ShowBlogs = () => {
           <th>Content</th>
           <th>Actions</th>
         </tr>
-        {blogs.map((blog) => (
+        {blogs?.map((blog) => (
           <tr key={blog.id}>
             <td>{blog.id}</td>
             <td>{blog.title}</td>
-            <td>{blog.name}</td>
+            <td>{blog.content}</td>
             <td>
               <Link to={`/edit/${blog.id}`}>Editar</Link>
               <button onClick={() => deleteBlog(blog.id)}>Delete</button>

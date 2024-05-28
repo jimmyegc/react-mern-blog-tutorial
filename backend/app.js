@@ -12,9 +12,9 @@ app.use("/blogs", blogRoutes);
 
 try {
   await db.authenticate();
-  console.log("Conexión exitosa a la BD.");
+  console.log("💿  Conexión exitosa a la BD.");
 } catch (error) {
-  console.log(`Error de la conexión ${error}`);
+  console.log(`⚠️  Error en la conexión (${error}).`);
 }
 
 app.get("/", (req, res) => {
@@ -22,5 +22,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(8000, () => {
-  console.log(`Server running on http://localhost:8000/`);
+  console.log(`🚀 Server running on http://localhost:8000/`);
 });
