@@ -21,10 +21,10 @@ const ShowBlogs = () => {
   }
 
   return (<>
-    <div className='container mx-auto'>
-      <Link to="/create">Create</Link>
-      <table id="customers">
-        <tr>
+    <div className='container mx-auto mt-4'>
+      <Link to="/create" className="bg-blue-600 text-white border border-l-gray-300 px-4 py-2 hover:text-black">Create</Link>
+      <table id="customers" className='border mt-4'>
+        <tr className='bg-blue-600 text-white'>
           <th>ID</th>
           <th>Title</th>
           <th>Content</th>
@@ -35,9 +35,9 @@ const ShowBlogs = () => {
             <td>{index + 1}</td>
             <td>{blog.title}</td>
             <td>{blog.content}</td>
-            <td>
-              <Link to={`/edit/${blog._id}`}>Editar</Link>
-              <button onClick={() => deleteBlog(blog._id)}>Delete</button>
+            <td className='p-2'>
+              <Link to={`/edit/${blog._id}`} className='border-2 border-black px-4 py-2'>Editar</Link>
+              <button onClick={() => deleteBlog(blog._id)} className='ml-2 border-2 border-red-600 px-4 py-1'>Delete</button>
             </td>
           </tr>
         ))}
